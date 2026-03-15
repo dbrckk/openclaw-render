@@ -94,10 +94,15 @@
     "web": {
       "search": {
         "enabled": true,
-        "apiKey": "${BRAVE_API_KEY}",
+        "provider": "perplexity",
         "maxResults": 5,
         "timeoutSeconds": 20,
-        "cacheTtlMinutes": 15
+        "cacheTtlMinutes": 15,
+        "perplexity": {
+          "apiKey": "${OPENROUTER_API_KEY}",
+          "baseUrl": "https://openrouter.ai/api/v1",
+          "model": "perplexity/sonar-pro"
+        }
       },
       "fetch": {
         "enabled": true,
@@ -111,7 +116,14 @@
   "browser": {
     "enabled": true,
     "evaluateEnabled": true,
-    "defaultProfile": "user",
+    "defaultProfile": "openclaw",
+    "headless": true,
+    "profiles": {
+      "openclaw": {
+        "cdpPort": 18800,
+        "color": "#FF4500"
+      }
+    },
     "ssrfPolicy": {
       "dangerouslyAllowPrivateNetwork": false
     }
@@ -151,4 +163,4 @@
       }
     }
   }
-      }
+    }
