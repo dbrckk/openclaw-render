@@ -8,4 +8,5 @@ RUN mkdir -p /root/.openclaw \
 
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
-COPY .openclaw/ /root/.openclaw/
+COPY openclaw.json /root/.openclaw/openclaw.json
+COPY auth-profiles.json /root/.openclaw/auth-profiles.json
