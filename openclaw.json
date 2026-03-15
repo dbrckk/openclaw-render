@@ -2,9 +2,11 @@
   "gateway": {
     "mode": "local"
   },
+
   "agents": {
     "defaults": {
       "userTimezone": "Europe/Paris",
+
       "model": {
         "primary": "groq/llama-3.1-8b-instant",
         "fallbacks": [
@@ -13,6 +15,7 @@
           "openrouter/openrouter/free"
         ]
       },
+
       "pdfModel": {
         "primary": "groq/openai/gpt-oss-20b",
         "fallbacks": [
@@ -20,6 +23,12 @@
           "openrouter/openrouter/free"
         ]
       },
+
+      "imageModel": {
+        "primary": "openrouter/openrouter/free",
+        "fallbacks": []
+      },
+
       "models": {
         "groq/llama-3.1-8b-instant": {
           "alias": "groq-lite",
@@ -40,60 +49,61 @@
           }
         },
         "openrouter/openrouter/free": {
-          "alias": "free-backup",
+          "alias": "backup-free",
           "params": {
             "temperature": 0.2
           }
         }
       },
+
       "compaction": {
-        "mode": "safeguard",
-        "reserveTokensFloor": 24000,
+        "enabled": true,
+        "triggerFraction": 0.7,
+        "targetFraction": 0.45,
         "memoryFlush": {
-          "enabled": true,
-          "softThresholdTokens": 6000,
-          "systemPrompt": "Session nearing compaction. Store durable memories now.",
-          "prompt": "Write any lasting notes to memory/YYYY-MM-DD.md; reply with NO_REPLY if nothing to store."
+          "enabled": true
         }
       },
+
       "contextPruning": {
-        "mode": "cache-ttl",
-        "ttl": "45m",
-        "keepLastAssistants": 4,
-        "softTrimRatio": 0.3,
-        "hardClearRatio": 0.5,
-        "minPrunableToolChars": 20000,
-        "softTrim": {
-          "maxChars": 3000,
-          "headChars": 1000,
-          "tailChars": 1000
-        },
-        "hardClear": {
-          "enabled": true,
-          "placeholder": "[Old tool result content cleared]"
-        }
+        "enabled": true,
+        "keepRecentUserTurns": 8,
+        "keepRecentAssistantTurns": 8,
+        "keepRecentToolMessages": 12
       },
-      "timeoutSeconds": 120,
-      "contextTokens": 32000,
+
+      "timeoutSeconds": 180,
+      "contextTokens": 64000,
       "maxConcurrent": 1,
-      "pdfMaxBytesMb": 8,
-      "pdfMaxPages": 10,
       "thinkingDefault": "low",
       "verboseDefault": "off",
-      "elevatedDefault": "off"
+      "elevatedDefault": "on"
     }
   },
+
   "tools": {
+    "loopDetection": {
+      "enabled": true
+    },
     "web": {
       "fetch": {
         "enabled": true,
-        "maxChars": 25000,
-        "maxCharsCap": 30000,
-        "timeoutSeconds": 15,
-        "cacheTtlMinutes": 10
+        "timeoutMs": 20000,
+        "maxChars": 40000,
+        "cacheTtlSeconds": 300
       }
     }
   },
+
+  "browser": {
+    "enabled": true,
+    "evaluateEnabled": true,
+    "defaultProfile": "openclaw",
+    "ssrfPolicy": {
+      "dangerouslyAllowPrivateNetwork": false
+    }
+  },
+
   "models": {
     "mode": "merge",
     "providers": {
