@@ -6,6 +6,11 @@
         "mode": "api_key",
         "key": "${GROQ_API_KEY}"
       },
+      "groq:backup": {
+        "provider": "groq",
+        "mode": "api_key",
+        "key": "${GROQ_API_KEY_2}"
+      },
       "openrouter:main": {
         "provider": "openrouter",
         "mode": "api_key",
@@ -13,7 +18,7 @@
       }
     },
     "order": {
-      "groq": ["groq:main"],
+      "groq": ["groq:main", "groq:backup"],
       "openrouter": ["openrouter:main"]
     }
   }
