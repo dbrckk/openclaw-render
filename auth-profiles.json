@@ -1,1 +1,20 @@
-
+{
+  "auth": {
+    "profiles": {
+      "groq:main": {
+        "provider": "groq",
+        "mode": "api_key",
+        "key": "${GROQ_API_KEY}"
+      },
+      "openrouter:main": {
+        "provider": "openrouter",
+        "mode": "api_key",
+        "key": "${OPENROUTER_API_KEY}"
+      }
+    },
+    "order": {
+      "groq": ["groq:main"],
+      "openrouter": ["openrouter:main"]
+    }
+  }
+}
