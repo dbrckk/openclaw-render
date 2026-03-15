@@ -13,10 +13,6 @@
           "openrouter/openrouter/free"
         ]
       },
-      "imageModel": {
-        "primary": "openrouter/openrouter/free",
-        "fallbacks": []
-      },
       "pdfModel": {
         "primary": "groq/openai/gpt-oss-20b",
         "fallbacks": [
@@ -75,57 +71,27 @@
         "hardClear": {
           "enabled": true,
           "placeholder": "[Old tool result content cleared]"
-        },
-        "tools": {
-          "deny": ["canvas"]
         }
       },
-      "timeoutSeconds": 180,
-      "contextTokens": 64000,
+      "timeoutSeconds": 120,
+      "contextTokens": 32000,
       "maxConcurrent": 1,
-      "pdfMaxBytesMb": 10,
-      "pdfMaxPages": 20,
+      "pdfMaxBytesMb": 8,
+      "pdfMaxPages": 10,
       "thinkingDefault": "low",
       "verboseDefault": "off",
-      "elevatedDefault": "on"
+      "elevatedDefault": "off"
     }
   },
   "tools": {
     "web": {
-      "search": {
-        "enabled": true,
-        "provider": "perplexity",
-        "maxResults": 5,
-        "timeoutSeconds": 20,
-        "cacheTtlMinutes": 15,
-        "perplexity": {
-          "apiKey": "${OPENROUTER_API_KEY}",
-          "baseUrl": "https://openrouter.ai/api/v1",
-          "model": "perplexity/sonar-pro"
-        }
-      },
       "fetch": {
         "enabled": true,
-        "maxChars": 40000,
-        "maxCharsCap": 50000,
-        "timeoutSeconds": 20,
-        "cacheTtlMinutes": 15
+        "maxChars": 25000,
+        "maxCharsCap": 30000,
+        "timeoutSeconds": 15,
+        "cacheTtlMinutes": 10
       }
-    }
-  },
-  "browser": {
-    "enabled": true,
-    "evaluateEnabled": true,
-    "defaultProfile": "openclaw",
-    "headless": true,
-    "profiles": {
-      "openclaw": {
-        "cdpPort": 18800,
-        "color": "#FF4500"
-      }
-    },
-    "ssrfPolicy": {
-      "dangerouslyAllowPrivateNetwork": false
     }
   },
   "models": {
